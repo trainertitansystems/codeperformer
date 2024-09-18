@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  labels:
+    app: my-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: myacr6bea8344.azurecr.io/fareapp:latest  # Replace with your Docker image URL
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"  # Example environment variable; adjust as needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+  labels:
+    app: my-app
+spec:
+  type: LoadBalancer  # Adjust this if you want a different service type
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: my-app
