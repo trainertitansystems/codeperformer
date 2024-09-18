@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
+  name: performance
   labels:
-    app: my-app
+    app: performance
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: my-app
+      app: performance
   template:
     metadata:
       labels:
-        app: my-app
+        app: performance
     spec:
       containers:
       - name: my-app-container
-        image: myacr6bea8344.azurecr.io/fareapp:latest  # Replace with your Docker image URL
+        image: myacr6bea8344.azurecr.io/performance:latest  # Replace with your Docker image URL
         ports:
         - containerPort: 8080
         env:
@@ -26,13 +26,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-service
+  name: performance
   labels:
-    app: my-app
+    app:performance
 spec:
   type: LoadBalancer  # Adjust this if you want a different service type
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: my-app
+    app: performance
