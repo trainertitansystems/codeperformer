@@ -15,7 +15,7 @@ RUN apk add --no-cache curl unzip \
 # Copy the Gradle build scripts and source code
 COPY settings.gradle /app/
 COPY build.gradle /app/
-#COPY src /app/src
+COPY src /app/src
 
 # Build the application
 RUN gradle build
