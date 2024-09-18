@@ -9,7 +9,7 @@ COPY settings.gradle /app/
 COPY build.gradle /app/
 
 # Copy the source code
-COPY src /app/src
+#COPY src /app/src
 
 # Command to build the application
 RUN gradle build
