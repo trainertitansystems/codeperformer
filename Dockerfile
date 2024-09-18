@@ -1,35 +1,21 @@
-# Use a base image with JDK 17 to build the application
-FROM openjdk:17-jdk AS build
+# Use a base image with JDK
+FROM openjdk:17-jdk-alpine
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the Gradle wrapper and build files
-COPY gradle /app/gradle
-COPY gradlew /app/
-COPY build.gradle /app/
+# Copy the Gradle build script
 COPY settings.gradle /app/
+COPY build.gradle /app/
 
-# Copy the source code into the container
+# Copy the source code
 COPY src /app/src
 
-# Make the Gradle wrapper executable
-RUN chmod +x ./gradlew
+# Command to build the application
+RUN gradle build
 
-# Build the application
-RUN ./gradlew build
+# Copy the built JAR file into the container
+COPY performance-0.0.1-SNAPSHOT.jar performance-0.0.1-SNAPSHOT.jar
 
-# Create a new stage to run the application
-FROM openjdk:17-jdk
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the JAR file from the build stage
-COPY --from=build /app/build/libs/your-app.jar /app/your-app.jar
-
-# Expose the port the application runs on
-EXPOSE 8080
-
-# Define the command to run the application
-ENTRYPOINT ["java", "-jar", "/app/your-app.jar"]
+# Command to run the application
+ENTRYPOINT ["java", "-jar", "performance-0.0.1-SNAPSHOT.jar"]
