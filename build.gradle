@@ -21,6 +21,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+// Define the main class for the application
 jar {
     manifest {
         attributes(
@@ -28,4 +29,3 @@ jar {
         )
     }
 }
-
