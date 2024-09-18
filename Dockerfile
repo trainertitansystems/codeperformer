@@ -14,7 +14,7 @@ RUN apk add --no-cache curl unzip \
 
 # Copy the Gradle build scripts and source code
 #COPY settings.gradle /app/
- RUN  ls - la
+# RUN  ls - la
 #COPY build.gradle /app/
 #RUN  cd /var/lib/jenkins/workspace/codeperformer/codeperformer/src
 #COPY src /app/src
