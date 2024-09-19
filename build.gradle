@@ -44,9 +44,15 @@ sonarqube {
 // Configure Jacoco test report
 jacocoTestReport {
     reports {
-        xml.enabled = true // Corrected syntax
-        csv.enabled = false // Optionally disable CSV if not needed
-        html.enabled = true // Enable HTML report for better readability
+        xml {
+            enabled = true // Enable XML report
+        }
+        csv {
+            enabled = false // Disable CSV report
+        }
+        html {
+            enabled = true // Enable HTML report
+        }
     }
 }
 
