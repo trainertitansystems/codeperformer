@@ -45,7 +45,7 @@ sonarqube {
 jacocoTestReport {
     reports {
         xml {
-            enabled = true // Enable XML report
+            enabled = false // Enable XML report
         }
         csv {
             enabled = false // Disable CSV report
