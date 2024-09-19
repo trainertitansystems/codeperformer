@@ -27,11 +27,12 @@ kind: Service
 metadata:
   name: performance
   labels:
-    app:performance
+    app: performance
 spec:
-  type: LoadBalancer  # Adjust this if you want a different service type
+  type: LoadBalancer  # Adjust this if you want a different service type (e.g., ClusterIP or NodePort)
   ports:
   - port: 80
     targetPort: 8080
+    protocol: TCP  # This field is optional, default is TCP
   selector:
     app: performance
