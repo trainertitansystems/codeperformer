@@ -2,7 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.0'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'org.sonarqube' version '4.0.0.2929' // Make sure this is applied
+    id 'org.sonarqube' version '4.0.0.2929' // Ensure this is applied
+    id 'jacoco' // Apply the Jacoco plugin for test coverage
 }
 
 group = 'com.example'
@@ -40,8 +41,11 @@ sonarqube {
     }
 }
 
+// Configure Jacoco test report
 jacocoTestReport {
-reports {
-    xml.enabled true
-}
+    reports {
+        xml.enabled true
+        csv.enabled false // Optionally disable CSV if not needed
+        html.enabled true // Enable HTML report for better readability
+    }
 }
