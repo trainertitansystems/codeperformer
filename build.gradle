@@ -2,9 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.0'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'jacoco'
-    id 'jacoco-report-aggregation'
-    id 'org.sonarqube' version '4.0.0.2929' // SonarQube plugin
+    id 'jacoco' // JaCoCo plugin
+    id 'org.sonarqube' version '2.7.1' // SonarQube plugin
 }
 
 group = 'com.example'
@@ -24,46 +23,38 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-// JaCoCo configuration
-jacoco {
-    toolVersion = "0.8.8" // Ensure you have the correct version
-}
-
-jacocoTestReport {
-    reports {
-        xml {
-            destination = file("${buildDir}/jacoco.xml") // Path for XML report
-        }
-        html {
-            destination = file("${buildDir}/jacocoHtml") // Path for HTML report
-        }
-    }
-}
-
-// If using aggregation
-reporting {
-    reports {
-        testCodeCoverageReport(JacocoCoverageReport) {
-            testType = TestSuiteType.UNIT_TEST // Specify the test type
-        }
-    }
-}
-
-// Main class configuration
 jar {
     manifest {
         attributes(
-            'Main-Class': 'com.example.webapp.TrafficApplication' // Your main class
+            'Main-Class': 'com.example.webapp.TrafficApplication'
         )
     }
 }
 
-// SonarQube configuration
+// Configure JaCoCo report
+jacoco {
+    toolVersion = "0.8.8" // Specify the JaCoCo version
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true // Enable XML report
+        csv.enabled false // Disable CSV report
+        html.enabled true // Enable HTML report (optional)
+    }
+}
+
+// Ensure the JaCoCo report runs after the test task
+tasks.withType(Test) {
+    finalizedBy jacocoTestReport
+}
+
+// Configure SonarQube
 sonarqube {
     properties {
         property "sonar.projectKey", "trainertitansystems_codeperformer"
         property "sonar.organization", "trainertitansystems"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "${System.getenv('SONAR_TOKEN')}" // Token from environment variable
+        property "sonar.login", "${System.getenv('SONAR_TOKEN')}" // Use the token set in Jenkins
     }
 }
