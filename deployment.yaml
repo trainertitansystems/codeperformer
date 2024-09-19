@@ -4,8 +4,9 @@ metadata:
   name: performance
   labels:
     app: performance
+    env: production
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: performance
@@ -15,13 +16,11 @@ spec:
         app: performance
     spec:
       containers:
-      - name: my-app-container
-        image: myacr6bea8344.azurecr.io/performance:latest  # Replace with your Docker image URL
+      - name: performance-container
+        image: myacr6bea8344.azurecr.io/performance:latest
         ports:
         - containerPort: 8080
-        env:
-        - name: SPRING_PROFILES_ACTIVE
-          value: "prod"  # Example environment variable; adjust as needed
+
 ---
 apiVersion: v1
 kind: Service
