@@ -39,3 +39,9 @@ sonarqube {
         property "sonar.login", "${System.getenv('SONAR_TOKEN')}" // Use the token set in Jenkins
     }
 }
+
+jacocoTestReport {
+reports {
+    xml.enabled true
+}
+}
