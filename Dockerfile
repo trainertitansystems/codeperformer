@@ -23,7 +23,7 @@ RUN apk add --no-cache curl unzip \
 #RUN gradle build
 
 # Copy the built JAR file into the container
-COPY build/libs/performance-0.0.1-SNAPSHOT.jar /app/performance-0.0.1-SNAPSHOT.jar
+COPY build/libs/codeperformer-0.0.1-SNAPSHOT.jar /app/codeperformer-0.0.1-SNAPSHOT.jar
 
 # Command to run the application
-ENTRYPOINT ["java", "-jar", "performance-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "codeperformer-0.0.1-SNAPSHOT.jar"]
