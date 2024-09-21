@@ -96,6 +96,8 @@ pipeline {
                 script {
                     sh '''
                         kubectl apply -f /var/lib/jenkins/workspace/codeperformer/codeperformer/deployment.yaml
+                        kubectl apply -f /var/lib/jenkins/workspace/codeperformer/codeperformer/hpa.yaml
+                        
                     '''
                 }
             }
