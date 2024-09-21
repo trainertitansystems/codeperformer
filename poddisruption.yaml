@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: performance-pdb
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: performance
+  minAvailable: 1
